@@ -13,12 +13,15 @@ def pagina_login(request):
     return render( request, 'home/login.html')
 
     
-class Login(View):
-    def logar(self, request):
-        if request.method == "POST":
-            username = self.request.POST.get("username")
-            password = self.request.POST.get("password")
-            user = authenticate(request, username=username, password=password)
-            if not user:
-                raise 404  # Redireciona para a página inicial após o login bem-sucedido
-            return redirect("home:index")
+def logar(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return redirect('home:index')
+        else:
+            raise 403
+    else:
+        raise 403
