@@ -21,9 +21,4 @@ class Login(View):
             user = authenticate(request, username=username, password=password)
             if not user:
                 raise 404  # Redireciona para a página inicial após o login bem-sucedido
-
-        # Se o login falhar, você pode adicionar uma mensagem de erro ao contexto
-        context = {
-            'error_message': 'Nome de usuário ou senha incorretos.'  # Mensagem de erro de exemplo
-        }
-        return print("não existe")
+            return redirect("home:index")
