@@ -25,3 +25,7 @@ def logar(request):
             raise 403
     else:
         raise 403
+    
+
+def criar_conta(request):
+    return render(request, 'home/criar_conta.html')
