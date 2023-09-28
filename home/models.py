@@ -18,3 +18,6 @@ class Usuario(models.Model):
     class Meta:
         verbose_name = 'Perfil'
         verbose_name_plural = 'Perfis'
+
+class UsuarioCreate(Usuario):
+    password = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='password')

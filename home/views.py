@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+
+from home.forms import UserForm
 # Create your views here.
 
 
@@ -28,4 +30,6 @@ def logar(request):
     
 
 def criar_conta(request):
-    return render(request, 'home/criar_conta.html')
+    context ={}
+    context['form']= UserForm()
+    return render(request, "home/criar_conta.html", context)
