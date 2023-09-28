@@ -2,37 +2,28 @@ from django import forms
 from . import models
 from django.contrib.auth.models import User
 
-class PerfilForm(forms.ModelForm):
-    class Meta:
-        model = models.Usuario
-        fields = '__all__'
 
    
 class UserForm(forms.ModelForm):
-    def __init__(self, usuario=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.usuario = usuario
+        password = forms.CharField(
+            label="password",
+            strip=False,
+            widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+            help_text='Use the same password as before.',
+            required=False,
+        )
+     
+        password2 = forms.CharField(
+            label="Confirmar_senha",
+            strip=False,
+            widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+            help_text='Use the same password as before.',
+            required=False,
+        )
+        class Meta:
+            model = User
+            fields = ['username', 'password',]
 
-    class Meta:
-        model = User
-        fields = ('username', 'password')
+        def clean(self, *args, **kwargs):
+              ...
         
-    def save(self, commit=True):
-        # Save the provided password in hashed format
-        user = super(UserForm, self).save(commit=False)
-        user.set_password(self.cleaned_data["password"])
-        if commit:
-            user.save()
-        return user
-    
-
-
-# # creating a form
-# class InputForm(forms.Form):
-  
-#     first_name = forms.CharField(max_length = 200)
-#     last_name = forms.CharField(max_length = 200)
-#     roll_number = forms.IntegerField(
-#                      help_text = "Enter 6 digit roll number"
-#                      )
-#     password = forms.CharField(widget = forms.PasswordInput())
