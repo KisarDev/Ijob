@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.http import HttpResponseServerError
+from django.http import request
+
+from home.forms import UserForm
 # Create your views here.
 
 
@@ -27,5 +31,18 @@ def logar(request):
         raise 403
     
 
-def criar_conta(request):
-    return render(request, 'home/criar_conta.html')
+def registrar(request):
+    register_form_data = request.session.get('register_form_data', None)
+    context ={}
+    context['form']= UserForm(register_form_data)
+    return render(request, "home/criar_conta.html", context)
+
+def criar(request):
+    if request.method != 'POST':
+        raise HttpResponseServerError({'error_message': 'Metodo não permitido'})
+    POST = request.POST
+    request.session['register_form_data'] = POST
+    date = UserForm(POST)
+    if date.is_valid():
+        date.save()
+    return redirect("home:login")

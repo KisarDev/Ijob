@@ -6,6 +6,16 @@
     <title>Document</title>
 </head>
 <body>
-    
+
+    <form action = "{% url 'home:criar'%}" method = "post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form">
+                <label for='{{field.id_for_label}}'>{{field.label}}</label> 
+                {{field}}
+            </div>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
