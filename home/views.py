@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseServerError
 from django.http import request
+from django.contrib.auth.hashers import make_password
+
+
 
 from home.forms import UserForm
 # Create your views here.
@@ -22,12 +25,10 @@ def logar(request):
     password = request.POST['password']
     user = authenticate(username=username, password=password)
     if user is not None:
-        if user.is_active:
-            login(request, user)
-            return redirect('home:index')
-        else:
-            raise 403
+        login(request, user)
+        return redirect('home:index')
     else:
+        print("não ativa")
         raise 403
     
 
@@ -39,10 +40,16 @@ def registrar(request):
 
 def criar(request):
     if request.method != 'POST':
-        raise HttpResponseServerError({'error_message': 'Metodo não permitido'})
+        raise HttpResponseServerError({'error_message': 'Método não permitido'})
+
     POST = request.POST
     request.session['register_form_data'] = POST
-    date = UserForm(POST)
-    if date.is_valid():
-        date.save()
+    form = UserForm(POST)
+
+    try:
+        if form.is_valid():
+            form.save()
+    except Exception as e:
+        print(f"Erro ao criar usuário: {e}")
+    
     return redirect("home:login")
