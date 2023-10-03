@@ -6,18 +6,11 @@ from django.contrib.auth.models import User
 
 class Usuario(models.Model):
     modalidade = models.CharField(max_length=1,
-                                   choices=(('P', 'Prestador'), ('C', 'Contratante')))
-    nome_completo: models.CharField(max_length=50)
-    data_nascimento: models.DateTimeField('%d-%m-%Y')
-    cpf: models.CharField(max_length=11, unique=True)
-    username = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Usuário')
-    email = models.EmailField()
+                                   choices=(('P', 'Prestador'),
+                                            ('C', 'Contratante')))
+    nome_completo = models.CharField(max_length=50)
+    cpf = models.CharField(max_length=11, unique=True)
     
 
 
-    class Meta:
-        verbose_name = 'Perfil'
-        verbose_name_plural = 'Perfis'
-
-class UsuarioCreate(Usuario):
-    password = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='password')
+    
