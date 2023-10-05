@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.http import HttpResponseServerError
+from django.http import Http404, HttpResponse, HttpResponseServerError
 from django.http import request
 from django.contrib.auth.hashers import make_password
+from django.contrib import messages
+import time
 
 
 
@@ -34,22 +36,26 @@ def logar(request):
 
 def registrar(request):
     register_form_data = request.session.get('register_form_data', None)
-    context ={}
-    context['form']= UserForm(register_form_data)
-    return render(request, "home/criar_conta.html", context)
+    form= UserForm(register_form_data)
+    return render(request, "home/criar_conta.html", {"form": form})
 
 def criar(request):
-    if request.method != 'POST':
-        raise HttpResponseServerError({'error_message': 'Método não permitido'})
+    if not request.POST:
+        raise Http404()
 
     POST = request.POST
     request.session['register_form_data'] = POST
     form = UserForm(POST)
 
-    try:
-        if form.is_valid():
-            form.save()
-    except Exception as e:
-        print(f"Erro ao criar usuário: {e}")
+    if form.is_valid():
+        form.save()
+        del(request.session['register_form_data'])
+        return redirect('home:login')
+    else:
+        messages.error(request, "Erro nos campos")    
+
+    # Redirecione para a página de registro após processar o formulário,
+    # independente de ser válido ou não.
+    return redirect('home:registrar')
+
     
-    return redirect("home:login")

@@ -38,24 +38,39 @@
 				</span>
 				<form class="login100-form validate-form p-b-33 p-t-5" action = "{% url 'home:criar'%}" method = "post">
                     {% csrf_token %}
-                    <div class="wrap-input100 validate-input" data-validate = "Enter username">
+					{% if messages %}
+						<div class="msg">
+						<ul>
+							{% for message in messages %}
+							<li {% if message.tags %} class="{{ messagemsg.tags }}"{% endif %}>{{ message }}</li>
+							{% endfor %}
+						</ul>
+						</div>
+					{% endif %}
+					
+					
+                    <div class="wrap-input100 validate-input">
 						<input class="input100" type="text" name="username" placeholder="Insira um nome de usuário">
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
+					
+					<div class="wrap-input100 validate-input">
 						<input class="input100" type="password" name="password" placeholder="Insira uma senha">
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
-                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+
+					
+                    <div class="wrap-input100 validate-input">
 						<input class="input100" type="password" name="password2" placeholder="Repita a senha">
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
-                    
+                   
 					<div class="container-login100-form-btn m-t-32">
 						<button class="login100-form-btn" type="submit" value="registrar">
 							Criar conta
 						</button>	
+					</div>
                 </form>
 			</div>
 		</div>		

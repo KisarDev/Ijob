@@ -476,4 +476,16 @@ iframe {
 }
 
 
+.msg {
+  color: red;  /* Cor do texto para mensagens de erro */
+  font-weight: bold;  /* Negrito para destacar as mensagens de erro */
+  list-style-type: none;  /* Remova os marcadores de lista */
+  margin: 0;  /* Remova a margem padrão para melhor formatação */
+  padding: 0;  /* Remova o preenchimento padrão para melhor formatação */
+  left: 47%;
+  position: absolute;
+  background-color: gold;
+  border: 5px solid gold;
+}
+
 
