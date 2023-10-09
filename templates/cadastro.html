@@ -1,0 +1,59 @@
+{% load static %}
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title></title>
+            <meta name="description" content="">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link href="{% static 'prestador/css/css.css' %}" rel="stylesheet">
+        </head>
+        <body>
+            <br>
+        <br>
+        <div class="container">
+            <h3 class="font-destaque">Ijob</h3>
+            <h3 class="font-destaque">Aqui sua profissão IMPORTA </h3>
+
+            <div class="row">
+                <div class="col-md-3" style="text-align: center">
+                    <img src="" alt="">
+                    <h3>Preencha corretamente o formulario abaixo:</h3>
+                </div>
+
+                <div class="col-md-9">
+                {% if messages %}
+                    <br>
+                    {% for message in messages %}
+                        <div class="success-message {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label>Qual profissão?</label>
+                        <br>
+                        <input type="text" class="input-default" name="profissao">
+                        <br>
+                        <br>
+                        <label>Tempo de experiencia:</label>
+                        <br>
+                        <input type="text" class="input-default" name="tempo">
+                        <br>
+                        <br>
+                        <label>Preço por dia:</label>
+                        <br>
+                        <input type="text" class="input-default w100" name="preco">
+                        <br>
+                        <br>
+                        <label for='foto'>Enviar fotos:</label>
+                        <br>
+                        <input type="file" class="input-default w100" name="foto">
+                        <br>
+                        <br>
+                        <input type="submit" class="btn-default">
+                    </form>
+                </div> 
+            </div>
+        </div>   
+        </body>
+    </html>
