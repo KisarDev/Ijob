@@ -11580,20 +11580,20 @@ html {
 
 .profile {
   position: relative;
-  height: 75vw;
-  width: 75vw;
+  height: 50vw;
+  width: 50vw;
   border-radius: 5vw;
   margin-top: 5vw;
   max-height: 40rem;
   max-width: 40rem;
 }
 .profile .profile-img {
-  height: 80vw;
-  max-height: 45rem;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  height: 35vw;
+  max-height: 35rem;
+  position: relative;
+  bottom: 20;
+  left: 65%;
+  transform: translateX(-55%);
 }
 .profile .dots-1 {
   position: absolute;
@@ -11638,7 +11638,7 @@ html {
     width: 60vw;
   }
   .profile .profile-img {
-    height: 65vw;
+    height: 50vw;
   }
   .profile .dots-1 {
     width: 3vw;
