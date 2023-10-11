@@ -6,11 +6,12 @@ from django.http import Http404, HttpResponse, HttpResponseServerError
 from django.http import request
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
+from core.settings import constants
 import time
 
 
 
-from home.forms import UserForm
+from home.forms import UserForm, RoleForm
 # Create your views here.
 
 
@@ -46,6 +47,12 @@ def criar(request):
     POST = request.POST
     request.session['register_form_data'] = POST
     form = UserForm(POST)
+
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+
+    if username == password:
+        messages.error(request, "Usuário e senha não podem ser iguais!!") 
 
     if form.is_valid():
         form.save()

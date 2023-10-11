@@ -5,6 +5,8 @@ from django.contrib.auth.hashers import make_password
 from django.http import HttpResponse
 from django.contrib import messages
 
+from home.models import Role
+
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -70,3 +72,19 @@ class UserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class RoleForm(forms.ModelForm):
+
+    modalidade = forms.CharField(
+        label="modalidade",
+        strip=False,
+        help_text='Use the same password as before.',
+        required=True,
+        error_messages={
+            'required': 'Please, repeat your password'
+        }
+    )
+
+    class Meta:
+        model = Role
+        fields = '__all__'

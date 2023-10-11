@@ -482,10 +482,9 @@ iframe {
   list-style-type: none;  /* Remova os marcadores de lista */
   margin: 0;  /* Remova a margem padrão para melhor formatação */
   padding: 0;  /* Remova o preenchimento padrão para melhor formatação */
-  left: 47%;
-  position: absolute;
-  background-color: gold;
-  border: 5px solid gold;
+  left: 15%;
+  position:relative;
+  
 }
 
 

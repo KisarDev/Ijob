@@ -42,7 +42,7 @@
 						<div class="msg">
 						<ul>
 							{% for message in messages %}
-							<li {% if message.tags %} class="{{ messagemsg.tags }}"{% endif %}>{{ message }}</li>
+							<li {% if message.tags %} class="{{ messages.tags }}"{% endif %}>{{ message }}</li>
 							{% endfor %}
 						</ul>
 						</div>
@@ -63,6 +63,15 @@
 					
                     <div class="wrap-input100 validate-input">
 						<input class="input100" type="password" name="password2" placeholder="Repita a senha">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input">
+						<label for="cars">Escolha a modalidade:</label>
+								<select name="modalidade" id="modalidade" multiple>
+								<option value="P">Prestador</option>
+								<option value="C">Contratante</option>
+								</select>
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
                    
